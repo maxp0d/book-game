@@ -17,8 +17,9 @@ jobs:
         php-version: '8.0'
     - uses: actions/checkout@v4
     - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      run: cp .env.example ./src/.env
     - name: Install Dependencies
+      working-directory: ./src
       run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Generate key
       run: php artisan key:generate
